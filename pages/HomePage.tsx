@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { animeService, extractPath } from '../services/api';
-import { HomeResult, CarouselItem } from '../types';
+import { HomeResult } from '../types';
 import { AnimeCard } from '../components/AnimeCard';
-import { ChevronRight, Play, Flame, Clock, PlusCircle } from 'lucide-react';
+import { Play, Flame, Clock, PlusCircle } from 'lucide-react';
+import { Skeleton } from '../components/Skeleton';
 
 export const HomePage: React.FC = () => {
   const [data, setData] = useState<HomeResult | null>(null);
@@ -34,13 +35,42 @@ export const HomePage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      <div className="space-y-12 pb-10">
+        {/* Carousel Skeleton */}
+        <div className="relative h-[400px] md:h-[500px] w-full bg-slate-900">
+           <Skeleton className="w-full h-full" />
+           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 z-20 container mx-auto space-y-4">
+             <Skeleton className="h-10 w-2/3 md:w-1/2" />
+             <Skeleton className="h-4 w-full md:w-1/3" />
+             <Skeleton className="h-4 w-5/6 md:w-1/4" />
+             <Skeleton className="h-12 w-32 rounded-full mt-4" />
+           </div>
+        </div>
+
+        <div className="container mx-auto px-4 space-y-12">
+          {/* Sections Skeleton */}
+          {[1, 2, 3].map((section) => (
+            <div key={section}>
+              <div className="flex items-center justify-between mb-6">
+                <Skeleton className="h-8 w-48" />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                {[...Array(10)].map((_, i) => (
+                  <div key={i} className="space-y-2">
+                     <Skeleton className="aspect-[3/4] w-full rounded-xl" />
+                     <Skeleton className="h-4 w-3/4" />
+                     <Skeleton className="h-3 w-1/2" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 
-  if (!data) return <div className="text-center p-10">Failed to load content.</div>;
+  if (!data) return <div className="text-center p-10">Gagal memuat konten.</div>;
 
   return (
     <div className="space-y-12 pb-10">
@@ -80,7 +110,7 @@ export const HomePage: React.FC = () => {
                       to={linkTo}
                       className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold transition-transform hover:scale-105 shadow-lg shadow-indigo-600/30 mt-4"
                     >
-                      <Play className="fill-white" size={20} /> Watch Now
+                      <Play className="fill-white" size={20} /> Tonton Sekarang
                     </Link>
                   </div>
                 </div>
@@ -110,7 +140,7 @@ export const HomePage: React.FC = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Clock className="text-indigo-500" /> Latest Releases
+              <Clock className="text-indigo-500" /> Rilis Terbaru
             </h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
@@ -131,7 +161,7 @@ export const HomePage: React.FC = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Flame className="text-orange-500" /> Trending Now
+              <Flame className="text-orange-500" /> Sedang Tren
             </h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
@@ -151,7 +181,7 @@ export const HomePage: React.FC = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <PlusCircle className="text-green-500" /> New Additions
+              <PlusCircle className="text-green-500" /> Tambahan Baru
             </h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">

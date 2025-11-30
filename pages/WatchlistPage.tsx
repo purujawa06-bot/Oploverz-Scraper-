@@ -11,7 +11,7 @@ export const WatchlistPage: React.FC = () => {
     <div className="container mx-auto px-4 py-8 min-h-screen">
       <div className="flex items-center gap-3 mb-8">
         <Heart className="text-rose-500 fill-rose-500" size={32} />
-        <h1 className="text-3xl font-bold text-white">Your Watchlist</h1>
+        <h1 className="text-3xl font-bold text-white">Daftar Tontonan Anda</h1>
         <span className="bg-slate-800 text-slate-300 text-sm px-3 py-1 rounded-full font-mono">
           {watchlist.length}
         </span>
@@ -33,7 +33,7 @@ export const WatchlistPage: React.FC = () => {
                   removeFromWatchlist(anime.originalLink || anime.link);
                 }}
                 className="absolute top-2 right-2 bg-rose-600/90 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:scale-110 shadow-lg z-20"
-                title="Remove from Watchlist"
+                title="Hapus dari Favorit"
               >
                 <Trash2 size={16} />
               </button>
@@ -43,15 +43,15 @@ export const WatchlistPage: React.FC = () => {
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-slate-800 rounded-xl bg-slate-900/30">
           <Heart className="text-slate-700 mb-4" size={64} />
-          <h2 className="text-xl font-semibold text-slate-300 mb-2">Your watchlist is empty</h2>
+          <h2 className="text-xl font-semibold text-slate-300 mb-2">Daftar tontonan Anda kosong</h2>
           <p className="text-slate-500 mb-6 max-w-md">
-            Start adding anime you want to watch by clicking the heart icon on any anime card.
+            Mulai tambahkan anime yang ingin Anda tonton dengan mengklik ikon hati pada kartu anime.
           </p>
           <Link 
             to="/" 
             className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors"
           >
-            Browse Anime
+            Jelajahi Anime
           </Link>
         </div>
       )}

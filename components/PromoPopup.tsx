@@ -34,9 +34,9 @@ export const PromoPopup: React.FC = () => {
             <Zap className="text-indigo-400" size={32} />
           </div>
 
-          <h2 className="text-2xl font-bold text-white mb-2">Powered by NextA API</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Didukung oleh NextA API</h2>
           <p className="text-slate-400 mb-6 text-sm leading-relaxed">
-            Experience the fastest anime data streaming. NimeStream is proudly powered by the robust NextA ecosystem.
+            Nikmati streaming data anime tercepat. NimeStream dengan bangga didukung oleh ekosistem NextA yang tangguh.
           </p>
 
           <div className="flex flex-col gap-3">
@@ -46,13 +46,13 @@ export const PromoPopup: React.FC = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-xl font-semibold transition-all hover:scale-105"
             >
-              Explore API Docs <ExternalLink size={18} />
+              Lihat Dokumen API <ExternalLink size={18} />
             </a>
             <button 
               onClick={() => setIsVisible(false)}
               className="text-slate-500 hover:text-slate-300 text-sm py-2"
             >
-              Continue to NimeStream
+              Lanjut ke NimeStream
             </button>
           </div>
         </div>

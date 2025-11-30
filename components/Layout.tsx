@@ -33,7 +33,7 @@ export const Layout: React.FC = () => {
               <form onSubmit={handleSearch} className="relative">
                 <input
                   type="text"
-                  placeholder="Search anime..."
+                  placeholder="Cari anime..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-800 text-slate-200 border border-slate-700 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
@@ -48,7 +48,7 @@ export const Layout: React.FC = () => {
             <div className="hidden md:flex items-center gap-4">
                <Link to="/watchlist" className="flex items-center gap-2 text-slate-300 hover:text-rose-500 transition-colors">
                  <Heart size={20} />
-                 <span className="text-sm font-medium">Watchlist</span>
+                 <span className="text-sm font-medium">Favorit</span>
                </Link>
             </div>
 
@@ -69,7 +69,7 @@ export const Layout: React.FC = () => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search anime..."
+                  placeholder="Cari anime..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-800 text-slate-200 border border-slate-700 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -80,9 +80,9 @@ export const Layout: React.FC = () => {
               </div>
             </form>
             <div className="flex flex-col space-y-2">
-              <Link to="/" className="block py-2 text-slate-300 hover:text-indigo-400" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <Link to="/" className="block py-2 text-slate-300 hover:text-indigo-400" onClick={() => setIsMenuOpen(false)}>Beranda</Link>
               <Link to="/watchlist" className="flex items-center gap-2 py-2 text-slate-300 hover:text-rose-500" onClick={() => setIsMenuOpen(false)}>
-                <Heart size={18} /> Watchlist
+                <Heart size={18} /> Favorit
               </Link>
             </div>
           </div>
@@ -100,8 +100,8 @@ export const Layout: React.FC = () => {
             <span className="font-semibold text-white">NimeStream</span>
           </div>
           <p className="text-slate-500 text-sm">
-            &copy; {new Date().getFullYear()} NimeStream. All rights reserved. <br/>
-            Data provided by NextA API.
+            &copy; {new Date().getFullYear()} NimeStream. Hak cipta dilindungi. <br/>
+            Data disediakan oleh NextA API.
           </p>
         </div>
       </footer>

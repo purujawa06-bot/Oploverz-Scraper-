@@ -4,6 +4,7 @@ import { animeService, extractPath } from '../services/api';
 import { AnimeDetail, Episode } from '../types';
 import { Play, Calendar, Info, Film, Layers, Heart, Check } from 'lucide-react';
 import { useWatchlist } from '../context/WatchlistContext';
+import { Skeleton } from '../components/Skeleton';
 
 export const DetailPage: React.FC = () => {
   const [data, setData] = useState<AnimeDetail | null>(null);
@@ -33,19 +34,60 @@ export const DetailPage: React.FC = () => {
     
     // Cleanup title on unmount
     return () => {
-      document.title = 'NimeStream - Watch Anime Online Free';
+      document.title = 'NimeStream - Nonton Anime Online Gratis';
     }
   }, [location.search]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[80vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      <div className="pb-16">
+        {/* Skeleton Header */}
+        <div className="relative h-[300px] md:h-[400px] w-full bg-slate-900 overflow-hidden">
+          <Skeleton className="w-full h-full opacity-30" />
+          <div className="absolute bottom-0 left-0 right-0 container mx-auto px-4 pb-8 flex flex-col md:flex-row items-end gap-8">
+             <div className="hidden md:block w-48 lg:w-56 flex-shrink-0 -mb-16 z-10">
+               <Skeleton className="w-full h-72 rounded-lg" />
+             </div>
+             <div className="flex-1 mb-4 md:mb-0 w-full space-y-3">
+               <Skeleton className="h-10 w-3/4 md:w-1/2" />
+               <Skeleton className="h-6 w-1/3" />
+               <div className="flex gap-2">
+                 <Skeleton className="h-6 w-16 rounded-full" />
+                 <Skeleton className="h-6 w-16 rounded-full" />
+                 <Skeleton className="h-6 w-16 rounded-full" />
+               </div>
+               <Skeleton className="h-10 w-40 rounded-full mt-2" />
+             </div>
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 mt-8 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="md:col-span-2 space-y-8">
+             <div className="md:hidden flex justify-center mb-6">
+               <Skeleton className="w-48 h-72 rounded-lg" />
+             </div>
+             <div className="space-y-4">
+                <Skeleton className="h-8 w-32" />
+                <Skeleton className="h-32 w-full rounded-xl" />
+             </div>
+             <div className="space-y-4">
+                <Skeleton className="h-8 w-32" />
+                <div className="space-y-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Skeleton key={i} className="h-16 w-full rounded-lg" />
+                  ))}
+                </div>
+             </div>
+          </div>
+          <div className="space-y-6">
+             <Skeleton className="h-64 w-full rounded-xl" />
+          </div>
+        </div>
       </div>
     );
   }
 
-  if (!data) return <div className="text-center p-10 text-xl text-slate-400">Anime not found or error loading data.</div>;
+  if (!data) return <div className="text-center p-10 text-xl text-slate-400">Anime tidak ditemukan atau gagal memuat data.</div>;
 
   const currentUrl = new URLSearchParams(location.search).get('url') || '';
   const isSaved = isInWatchlist(currentUrl);
@@ -112,7 +154,7 @@ export const DetailPage: React.FC = () => {
                     }`}
                   >
                     {isSaved ? <Check size={18} /> : <Heart size={18} className={isSaved ? "fill-current" : ""} />}
-                    {isSaved ? 'In Watchlist' : 'Add to Watchlist'}
+                    {isSaved ? 'Di Favorit' : 'Tambah ke Favorit'}
                   </button>
                 </div>
             </div>
@@ -130,20 +172,20 @@ export const DetailPage: React.FC = () => {
 
           <section>
             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Info className="text-indigo-500" size={20} /> Synopsis
+              <Info className="text-indigo-500" size={20} /> Sinopsis
             </h3>
             <p className="text-slate-300 leading-relaxed bg-slate-900/50 p-6 rounded-xl border border-slate-800">
-              {data.description || "No description available."}
+              {data.description || "Tidak ada deskripsi tersedia."}
             </p>
           </section>
 
           <section>
              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Layers className="text-indigo-500" size={20} /> Episodes
+              <Layers className="text-indigo-500" size={20} /> Episode
             </h3>
             <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-2 max-h-[600px] overflow-y-auto">
               {!data.episodes || data.episodes.length === 0 ? (
-                <div className="p-4 text-center text-slate-500">No episodes available yet.</div>
+                <div className="p-4 text-center text-slate-500">Belum ada episode tersedia.</div>
               ) : (
                 <div className="flex flex-col gap-2">
                   {data.episodes?.map((ep, idx) => (
@@ -166,7 +208,7 @@ export const DetailPage: React.FC = () => {
                         </div>
                       </div>
                       <div className="text-xs font-semibold bg-slate-900 text-slate-400 px-2 py-1 rounded group-hover:bg-indigo-900 group-hover:text-indigo-200">
-                        Watch
+                        Tonton
                       </div>
                     </Link>
                   ))}
@@ -180,11 +222,11 @@ export const DetailPage: React.FC = () => {
         <div className="space-y-6">
           <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-800">
              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-              <Film className="text-indigo-500" size={18} /> Information
+              <Film className="text-indigo-500" size={18} /> Informasi
             </h3>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Type</span>
+                <span className="text-slate-400">Tipe</span>
                 <span className="text-slate-200">TV Series</span>
               </div>
               <div className="flex justify-between border-b border-slate-800 pb-2">
@@ -196,7 +238,7 @@ export const DetailPage: React.FC = () => {
                 <span className="text-slate-200">{data.information?.status}</span>
               </div>
                <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Total Episodes</span>
+                <span className="text-slate-400">Total Episode</span>
                 <span className="text-slate-200">{data.episodes?.length || 0}</span>
               </div>
             </div>

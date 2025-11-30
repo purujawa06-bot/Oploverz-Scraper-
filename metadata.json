@@ -1,0 +1,5 @@
+{
+  "name": "NimeStream",
+  "description": "A modern, responsive anime streaming application powered by NextA API.",
+  "requestFramePermissions": []
+}
